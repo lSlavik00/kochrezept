@@ -14,11 +14,11 @@ CREATE TABLE IF NOT EXISTS rezept_kategorie (
 	rezept_kategorie_id INT NOT NULL AUTO_INCREMENT,
 	rezept_kategorie_name VARCHAR(50),
 	rezept_kategorie_beschreibung VARCHAR(100),
-	PRIMARY KEY (rezept_kategorie_id)	
+	PRIMARY KEY (rezept_kategorie_id)
 );
 
 INSERT INTO rezept_kategorie (rezept_kategorie_name, rezept_kategorie_beschreibung)
-		VALUES('Frühstück', 'Alles rund ums Frühstück'), ('Vorspeisen', 'Für den kleinen Hunger'), ('Lunch', 'Ein entspanntes Mittagessen wirkt wunder'), ('Salate', 'Frisch durch den Tag'), ('Suppen', 'Zu jeder Jahreszeit eine Freude'), ('Desserts', 'Süße Träume am Tage');
+		VALUES('Frühstück', 'Alles rund ums Frühstück'), ('Vorspeisen', 'Für den kleinen Hunger'), ('Lunch', 'Ein entspanntes Mittagessen wirkt wunder'), ('Salate', 'Frisch durch den Tag'), ('Suppen', 'Zu jeder Jahreszeit eine Freude'), ('Soße', 'Belege dein Hauptgericht'), ('Desserts', 'Süße Träume am Tage');
 
 -- create table rezept
 
@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS rezept (
 	rezept_name VARCHAR(50),
 	rezept_beschreibung VARCHAR(100),
 	rezept_tipp VARCHAR(200),
-	rezept_portionen INT,
 	fk_rezept_kategorie_id INT,
 	PRIMARY KEY (rezept_id),
 	FOREIGN KEY rezept (fk_rezept_kategorie_id) REFERENCES rezept_kategorie (rezept_kategorie_id)
@@ -49,7 +48,7 @@ Claudia bereitet ihn abend zu und nimmt nur 4 gr. Hefe. Lässt ihn bei Raumtempe
 ('Mexikanischer Tofu-Salat', 4, 'Reisen erweitert den Horizont! Und diese Rezept hat meinen ganz sicher erweitert!', 'Auch lecker & mit Bohnen ist mein Quinoa-Bohnen Salat sowie meine Nacho-Bowl mit Ananas-Salsa!'),
 ('Quinoa-Bohnen Salat', 4, 'Salat ist nicht nur Blätter und Gemüse mit Essig-Dressing.', 'Salat kann so viel mehr, zum Beispiel dieser Quinoa-Bohnen Salat, der warm wie kalt lecker schmeckt!'),
 ('Nacho-Bowl mit Ananas-Salsa', 2,'Der perfekte Snack für jeden Spieleabend, zum Binge-Watchen oder einfach nur so', 'Dazu benötigtest du diese Ananas-Salsa, die auch sehr lecker als Burger-Soße oder zum Grillen verwendet werden kann'),
-('Ananas-Salsa', 5, 'Dein perfekter Begleiter für Nachos, Burger oder zum Grillen', 'Egal, ob du alleine deine Lieblingssendung binge schaust oder ob du zu einem Spieleabend eingeladen hast'),
+('Ananas-Salsa', 7, 'Dein perfekter Begleiter für Nachos, Burger oder zum Grillen', 'Egal, ob du alleine deine Lieblingssendung binge schaust oder ob du zu einem Spieleabend eingeladen hast'),
 ('Mandel-Spargel Risotto', 3, 'Traumhaftes Risotto mit dezentem Geschmack nach Mandel und gebratenem Spargel!', 'Noch ist ja Spargelzeit und das alleine ist schon Grund genug, unbedingt diese Mandel-Spargel Risotto zu probieren.'),
 ('Couscous-Gemüse-Salat mit Joghurt-Minz-Dip', 4, 'Wie kann man einen schönen Sommer-Abend besser ausklingen lassen als mit Freunden und einem kaltem Couscous-Gemüse-Salat mit Joghurt-Minz Dip?', 'Für den Gemüse-Couscous-Salat wird das Gemüse kurz angebraten, Pinienkerne geröstet und für eine süße note sorgen Sultaninen.'),
 ('Pfirsich-Joghurt-Schnitten mit Streuseln', 6, 'Es wird Frühling! Und wie könnte man den Frühling besser willkommen heißen', 'Dazu ein einfacher Joghurt-Zitronen Teig, Pfirsiche und Himbeeren und schon sind die Pfirsich-Joghurt-Schnitten bereit'),
@@ -61,6 +60,7 @@ Claudia bereitet ihn abend zu und nimmt nur 4 gr. Hefe. Lässt ihn bei Raumtempe
 ('Gemüse-Tofu Curry', 3, 'Wenn es draußen kälter wird, muss es drinnen umso wärmer werden', 'Ich habe darauf geachtet, dass es nicht zu scharf ist, aber mehr Chili ist natürlich immer möglich. '),
 ('Karottenkuchen', 6, 'Karottenkuchen für Alle! Ok, eigentlich lieber nur für mich, denn wenn es um diesen Kuchen geht', 'Damit du trotzdem auch von ihm kosten kannst, verrate ich dir hier mein Rezept.')
 ;
+
 
 -- create table rezept_zutat - n:m
 
