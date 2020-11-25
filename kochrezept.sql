@@ -18,7 +18,15 @@ CREATE TABLE IF NOT EXISTS rezept_kategorie (
 );
 
 INSERT INTO rezept_kategorie (rezept_kategorie_name, rezept_kategorie_beschreibung)
-		VALUES('Frühstück', 'Alles rund ums Frühstück'), ('Vorspeisen', 'Für den kleinen Hunger'), ('Lunch', 'Ein entspanntes Mittagessen wirkt wunder'), ('Salate', 'Frisch durch den Tag'), ('Suppen', 'Zu jeder Jahreszeit eine Freude'), ('Soße', 'Belege dein Hauptgericht'), ('Desserts', 'Süße Träume am Tage');
+		VALUES
+        ('Frühstück', 'Alles rund ums Frühstück'), 
+        ('Vorspeisen', 'Für den kleinen Hunger'), 
+        ('Lunch', 'Ein entspanntes Mittagessen wirkt wunder'), 
+        ('Salate', 'Frisch durch den Tag'), 
+        ('Suppen', 'Zu jeder Jahreszeit eine Freude'), 
+        ('Desserts', 'Süße Träume am Tage'), 
+        ('Soße', 'Belege dein Hauptgericht')
+        ;
 
 -- create table rezept
 
@@ -73,6 +81,80 @@ CREATE TABLE IF NOT EXISTS rezept_zutat (
 	rezept_zutat_menge INT
 );
 
+INSERT INTO rezept_zutat (fk_rezept_id, fk_zutat_id, fk_mengeneinheit_id, rezept_zutat_menge)
+VALUES
+(1, 15, 2, 400),
+(1, 16, 2, 100),
+(1, 1, 2, 50),
+(2, 12, 2, 250),
+(2, 13, 2, 300),
+(2, 14, 2, 150),
+(3, 7, 2, 250),
+(3, 4, 2, 300),
+(3, 16, 2, 150),
+(4, 1, 2, 250),
+(4, 2, 2, 300),
+(4, 9, 2, 150),
+(4, 1, 2, 250),
+(4, 2, 2, 300),
+(4, 9, 2, 150),
+(4, 3, 2, 250),
+(4, 7, 2, 300),
+(4, 16, 2, 150),
+(5, 1, 2, 550),
+(5, 2, 2, 300),
+(5, 9, 2, 150),
+(5, 3, 2, 250),
+(6, 1, 2, 250),
+(6, 2, 2, 300),
+(6, 3, 2, 150),
+(7, 14, 2, 250),
+(7, 11, 2, 300),
+(7, 13, 2, 150),
+(8, 1, 2, 250),
+(8, 15, 2, 300),
+(8, 4, 2, 150),
+(9, 1, 2, 250),
+(9, 3, 2, 300),
+(9, 9, 2, 150),
+(10, 4, 2, 250),
+(10, 5, 2, 300),
+(10, 8, 2, 150),
+(10, 11, 2, 150),
+(11, 4, 2, 250),
+(11, 5, 2, 300),
+(11, 8, 2, 150),
+(11, 11, 2, 150),
+(12, 3, 2, 250),
+(12, 5, 2, 300),
+(12, 8, 2, 150),
+(12, 9, 2, 150),
+(13, 1, 2, 250),
+(13, 5, 2, 300),
+(13, 10, 2, 150),
+(13, 11, 2, 150),
+(14, 4, 2, 250),
+(14, 5, 2, 300),
+(14, 8, 2, 150),
+(14, 14, 2, 150),
+(15, 1, 2, 250),
+(15, 2, 2, 300),
+(15, 8, 2, 150),
+(15, 13, 2, 150),
+(16, 2, 2, 250),
+(16, 5, 2, 300),
+(16, 8, 2, 150),
+(16, 11, 2, 150),
+(17, 2, 2, 250),
+(17, 5, 2, 300),
+(18, 1, 2, 250),
+(18, 9, 2, 300),
+(19, 3, 2, 250),
+(19, 16, 2, 300),
+(20, 2, 2, 250),
+(20, 13, 2, 300)
+;
+
 -- create table zutat_kategorie
 
 DROP TABLE IF EXISTS zutat_kategorie;
@@ -84,8 +166,14 @@ CREATE TABLE IF NOT EXISTS zutat_kategorie (
 	PRIMARY KEY (zutat_kategorie_id)
 );
 
-INSERT INTO zutat_kategorie (zutat_kategorie_name, zutat_kategorie_id)
-VALUES('Nudeln', 1), ('Gemüse/Salate', 2), ('Fisch', 3), ('Fleisch', 4), ('Sonstiges', 5);
+INSERT INTO zutat_kategorie (zutat_kategorie_name, zutat_kategorie_id, zutat_kategorie_beschreibung)
+VALUES
+('Nudeln', 1, 'Nudel ist die Bezeichnung für: Lebensmittel aus Teig, siehe Teigwaren; Untergruppe der Teigwaren, siehe Nudel (Lebensmittel); in Südösterreich eine gegarte ...'), 
+('Gemüse/Salate', 2, 'Gemüse (mhd. gemüese, ursprüngliche Bedeutung: Mus aus Nutzpflanzen) ist heute ein Sammelbegriff für essbare Pflanzenteile wild wachsender oder in ...'), 
+('Fisch', 3, 'Fische oder Pisces (lateinisch piscis „Fisch“) sind aquatisch lebende Wirbeltiere mit Kiemen. Im engeren Sinne wird der Begriff Fische eingeschränkt auf ...'), 
+('Fleisch', 4, 'Fleisch (von althochdeutsch fleisc) bezeichnet im Allgemeinen Weichteile von Mensch und Tieren. Im Besonderen steht der Begriff für Teile von Säugetieren ...'), 
+('Sonstiges', 5, 'Sonstige Arten...')
+;
 
 -- create table zutat
 
@@ -103,12 +191,25 @@ CREATE TABLE IF NOT EXISTS zutat (
 	ON DELETE NO ACTION
 );
 
-INSERT INTO zutat (zutat_name, fk_zutat_kategorie_id)
-VALUES 	('Spaghetti', 1), ('Tagliatelle', 1), ('Makkaroni', 1), ('Farfalle', 1),
-				('Brokkoli', 2), ('Blumenkohl', 2), ('Bärlauch', 2), ('Eichblattsalat', 2), ('Rucola', 2),
-				('Seelachs', 3), ('Barsch', 3), ('Forelle', 3),
-				('Schweinefleisch', 4), ('Rindfleisch', 4),
-				('Butter', 5), ('Wasser', 5);
+INSERT INTO zutat (zutat_name, fk_zutat_kategorie_id, zutat_kalorien, zutat_beschreibung)
+VALUES 	
+('Spaghetti', 1, 582, ' italienische Standardaussprache [ spa-get-ti], (gemäß Duden auch Spagetti) sind aus Hartweizengrieß hergestellte Teigwaren'), 
+('Tagliatelle', 1, 605, 'Tagliatelle [taʎːaˈtɛlːe] ( Audio-Datei / Hörbeispiel anhören) (von italienisch tagliare, „schneiden“) sind eine Variante von Bandnudeln'), 
+('Makkaroni', 1, 870, 'Makkaroni (italienisch maccheroni; in der Schweiz Magronen; für kleine Makkaroni in der Schweiz Hörnli, in Österreich und in Deutschland Hörnchen)'), 
+('Farfalle', 1, 850, 'Farfalle ‚Schmetterlinge, sind italienische Nudeln in Schmetterlingsform. Für die Herstellung werden mit einem Teigrädchen aus einem flachen Pastateig'),
+('Brokkoli', 2, 475, 'Die Gemüsepflanze Broccoli oder Brokkoli entstammt aus der Familie der Kreuzblütengewächse. Derzeit sind 12 Arten der Pflanze'), 
+('Blumenkohl', 2, 420, 'Blumenkohl (Brassica oleracea var. botrytis L.), auch Karfiol, Käsekohl, Blütenkohl, Traubenkohl, Minarett-Kohl oder Italienischer Kohl genannt'), 
+('Bärlauch', 2, 150, 'Der Bärlauch ist eine ausdauernde krautige Pflanze'), 
+('Eichblattsalat', 2, 215, 'Der Eichblattsalat ist ein Verwandter des Kopfsalats und der Endivie, aus denen Amerikaner diese interessante Version züchteten.'), 
+('Rucola', 2, 220, 'Als Rucola (auch Rukola, Rauke, Arugula) werden verschiedene Pflanzenarten aus der Familie der Kreuzblütengewächse gehandelt.'),
+('Seelachs', 3, 612, 'Seelachse gehören zur Familie der dorschartigen Fische und sind eng mit dem Kabeljau verwandt.'), 
+('Barsch', 3, 315, ' Barsche sind Haftlaicher. Der Barsch ist ein sehr geselliger Schwarmfisch. Er ernährt sich von Plankton, Kleintieren und Fischen.'), 
+('Forelle', 3, 550, 'Forellen zählen zu den lachsartigen Fischen. Es gibt unterschiedliche Arten von Forellen, die in Anlehnung an ihren Lebensraum und ihr ...'),
+('Schweinefleisch', 4, 845, 'Die Fleischstücke vom Schwein und ihre Verwendung. Schweinefleisch zeichnet sich durch einen würzigen und pikanten Geschmack aus. Es muss frisch sein, ...'), 
+('Rindfleisch', 4, 715, 'Rindfleisch ist der übergeordnete Begriff für Teilstücke von weiblichen Jungtieren - den Färsen - sowie von Kühen, Bullen und Ochsen. Einige Teilstücke vom Rind ...'),
+('Butter', 5, 390, 'Butter (mittelhochdeutsch buter, althochdeutsch butera, über lateinisch butyrum von altgriechisch βούτυρον boútyron ‚Kuhmilchquark) ist ein meist aus dem ...'), 
+('Wasser', 5, 1, 'Wasser (H2O) ist eine chemische Verbindung aus den Elementen Sauerstoff (O) und Wasserstoff (H). Wasser ist als Flüssigkeit durchsichtig, weitgehend farb-, ...')
+;
 
 -- create table mengeneinheit
 
@@ -122,4 +223,11 @@ CREATE TABLE IF NOT EXISTS mengeneinheit (
 );
 
 INSERT INTO mengeneinheit (mengeneinheit_name, mengeneinheit_kurz)
-VALUES('Milligramm', 'mg'), ('Gramm', 'g'), ('Kilogramm', 'kg'), ('Liter', 'L'), ('Milliliter', 'ml'), ('Esslöffel', 'EL');
+VALUES
+('Milligramm', 'mg'), 
+('Gramm', 'g'), 
+('Kilogramm', 'kg'), 
+('Liter', 'L'), 
+('Milliliter', 'ml'), 
+('Esslöffel', 'EL')
+;
